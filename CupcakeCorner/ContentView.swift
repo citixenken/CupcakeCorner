@@ -38,6 +38,14 @@ import SwiftUI
 
 
 struct ContentView: View {
+    
+    @State private var username = ""
+    @State private var email = ""
+    
+    var disabledForm: Bool {
+        username.count < 5 || email.count < 5
+    }
+    
 //    @State private var results = [Result]()
 //
 //    func loadData() async {
@@ -60,6 +68,19 @@ struct ContentView: View {
 //    }
     
     var body: some View {
+        Form {
+            Section {
+                TextField("Username: ", text: $username)
+                TextField("Email: ", text: $email)
+            }
+            
+            Section {
+                Button("Create Account") {
+                    print("Creating account...")
+                }
+                .disabled(disabledForm)
+            }
+        }
         
 //        AsyncImage(url: URL(string: "https://hws.dev/img/logo.png")) { image in
 //            image
@@ -71,18 +92,18 @@ struct ContentView: View {
 //        }
 //        .frame(width: 400, height: 400)
         
-        AsyncImage(url: URL(string: "https://hws.dev/img/bad.png")) { phase in
-            if let image = phase.image {
-                image
-                    .resizable()
-                    .scaledToFit()
-            } else if phase.error != nil {
-                Text("There was an error loading the image.")
-            } else {
-                ProgressView()
-            }
-        }
-        .frame(width: 300, height: 300)
+//        AsyncImage(url: URL(string: "https://hws.dev/img/malicious.png")) { phase in
+//            if let image = phase.image {
+//                image
+//                    .resizable()
+//                    .scaledToFit()
+//            } else if phase.error != nil {
+//                Text("There was an error loading the image.")
+//            } else {
+//                ProgressView()
+//            }
+//        }
+//        .frame(width: 300, height: 300)
         
         
 //        List(results, id: \.trackId) { item in
