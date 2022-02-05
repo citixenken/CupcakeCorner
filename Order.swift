@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class Order: ObservableObject {
+class Order: ObservableObject, Codable {
     static let types = ["Vanilla", "Strawberry", "Chocolate", "Rainbow"]
     
     @Published var type = 0
@@ -57,6 +57,9 @@ class Order: ObservableObject {
         return cost
     }
     
+    //new init that creates an order without any data whatsoever
+    init() {}
+    
     //Making our code Codable compliant by effectively bypassing the @Published property wrapper
     enum CodingKeys: CodingKey {
         case type, quantity, extraFrosting, addSprinkles, name, streetAddress, city, zip
@@ -90,7 +93,4 @@ class Order: ObservableObject {
         zip = try container.decode(String.self, forKey: .zip)
 
     }
-    
-    //new init that creates an order without any data whatsoever 
-    init() {}
 }
